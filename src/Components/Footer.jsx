@@ -5,10 +5,16 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <>
-      <div style={{ backgroundColor: "black" }} className=" container-fluid row mt-4 p-4 w-100">
+      <div
+        style={{ backgroundColor: "black", margin: "0", padding: "0" }}
+        className=" container-fluid row mt-4 p-4 w-100"
+      >
         <div className="col-lg-5">
-          <h4> <i class="fa-solid fa-music"></i>{" "} Media Player</h4>
-          <p>
+          <h4>
+            {" "}
+            <i class="fa-solid fa-music"></i> Media Player
+          </h4>
+          <p  >
             Designed and build with all the love in the world by the Luminar
             team with the help of our contributors.
           </p>
@@ -17,11 +23,17 @@ const Footer = () => {
         </div>
         <div className="col-lg-2">
           <h4>Links</h4>
-          <Link to={"./"} style={{ textDecoration: "none" }}>Landing Page</Link>
+          <Link to={"./"} style={{ textDecoration: "none" }}>
+            Landing Page
+          </Link>
           <br />
-          <Link to={"./home"} style={{ textDecoration: "none" }}>Home Page</Link>
+          <Link to={"./home"} style={{ textDecoration: "none" }}>
+            Home Page
+          </Link>
           <br />
-          <Link to={"./history"} style={{ textDecoration: "none" }}>History Page </Link>
+          <Link to={"./history"} style={{ textDecoration: "none" }}>
+            History Page{" "}
+          </Link>
         </div>
         <div className="col-lg-2">
           <h4>Guides</h4>
@@ -31,7 +43,11 @@ const Footer = () => {
         </div>
         <div className="col-lg-3">
           <h4>contacts</h4>
-          <input style={{ height: "43px" }} type="text" />{" "}
+          <input
+            className="rounded"
+            style={{ height: "45px" }}
+            type="text"
+          />{" "}
           <button
             style={{
               backgroundColor: "violet ",
