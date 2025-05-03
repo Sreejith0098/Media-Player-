@@ -6,10 +6,26 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 const Add = () => {
   const [show, setShow] = useState(false);
-
+  const [videoDetails, setVideoDetails] = useState({
+    caption: "",
+    imageUrl: "",
+    youtubeLink: "",
+  });
+ 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const addDetails = () => {
+    console.log(videoDetails);
+  };
 
+  const convertedToId = (videoUrl) => {
+    console.log(videoUrl.slice(17, 28));
+    let videoId = videoUrl.slice(17, 28);
+  ;
+  setVideoDetails({
+    ...videoDetails,
+    youtubeLink: `https://www.youtube.com/embed/${videoId}`,
+  });}
   return (
     <>
       <div className=" d-flex align-items-center">
@@ -21,12 +37,7 @@ const Add = () => {
           +
         </button>
       </div>
-      <Modal
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={true}
-      >
+      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={true}>
         <Modal.Header closeButton>
           <Modal.Title>Upload your video details</Modal.Title>
         </Modal.Header>
@@ -37,21 +48,37 @@ const Add = () => {
               label="Video caption"
               className="mb-1 w-100 "
             >
-              <Form.Control type="text" placeholder="Video caption" />
+              <Form.Control
+                onChange={(e) =>
+                  setVideoDetails({ ...videoDetails, caption: e.target.value })
+                }
+                type="text"
+                placeholder="Video caption"
+              />
             </FloatingLabel>
             <FloatingLabel
               controlId="floatingInputImgUrl"
               label="Video image url"
               className="mb-1 w-100 "
             >
-              <Form.Control type="text" placeholder="Video caption" />
+              <Form.Control
+                onChange={(e) =>
+                  setVideoDetails({ ...videoDetails, imageUrl: e.target.value })
+                }
+                type="text"
+                placeholder="Video caption"
+              />
             </FloatingLabel>
             <FloatingLabel
               controlId="floatingInputVideoLink"
               label="Video youtube link"
               className="mb-1 w-100 "
             >
-              <Form.Control type="text" placeholder="Video caption" />
+              <Form.Control
+                onChange={(e) => convertedToId(e.target.value)}
+                type="text"
+                placeholder="Video caption"
+              />
             </FloatingLabel>
           </div>
         </Modal.Body>
@@ -59,7 +86,9 @@ const Add = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary">Add</Button>
+          <Button onClick={addDetails} variant="primary">
+            Add
+          </Button>
         </Modal.Footer>
       </Modal>
     </>
