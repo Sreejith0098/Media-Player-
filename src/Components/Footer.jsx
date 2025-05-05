@@ -12,7 +12,7 @@ const Footer = () => {
         <div className="col-lg-5">
           <h4>
             {" "}
-            <i class="fa-solid fa-music"></i> Media Player
+            <i className="fa-solid fa-music"></i> Media Player
           </h4>
           <p  >
             Designed and build with all the love in the world by the Luminar
@@ -62,27 +62,27 @@ const Footer = () => {
           <br />
           <i
             style={{ fontSize: "19px" }}
-            class="fa-brands fa-twitter  me-2 mt-1 "
+            className="fa-brands fa-twitter  me-2 mt-1 "
           ></i>
           <i
             style={{ fontSize: "19px" }}
-            class="fa-brands fa-instagram me-2 mt-1"
+            className="fa-brands fa-instagram me-2 mt-1"
           ></i>
           <i
             style={{ fontSize: "19px" }}
-            class="fa-brands fa-facebook me-2 mt-1"
+            className="fa-brands fa-facebook me-2 mt-1"
           ></i>
           <i
             style={{ fontSize: "19px" }}
-            class="fa-brands fa-linkedin me-2 mt-1"
+            className="fa-brands fa-linkedin me-2 mt-1"
           ></i>
           <i
             style={{ fontSize: "19px" }}
-            class="fa-brands fa-github me-2 mt-1"
+            className="fa-brands fa-github me-2 mt-1"
           ></i>
           <i
             style={{ fontSize: "19px" }}
-            class="fa-solid fa-phone me-2 mt-1"
+            className="fa-solid fa-phone me-2 mt-1"
           ></i>
         </div>
       </div>

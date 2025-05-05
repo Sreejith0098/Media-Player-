@@ -4,6 +4,8 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+import { uploadVideoAPI } from "../services/allApi";
+
 const Add = () => {
   const [show, setShow] = useState(false);
   const [videoDetails, setVideoDetails] = useState({
@@ -14,8 +16,14 @@ const Add = () => {
  
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const addDetails = () => {
+  const  addDetails = async() => {
     console.log(videoDetails);
+    let result = await uploadVideoAPI(videoDetails)
+    console.log(result)
+    if(result.status>=200 && result.status<=300){
+      alert("successfully Added your video")
+      handleClose()
+    }
   };
 
   const convertedToId = (videoUrl) => {

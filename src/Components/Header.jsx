@@ -9,7 +9,7 @@ const Header = () => {
         <Container>
           <Navbar.Brand >
 <Link style={{textDecoration:'none'}} to={'/'}>
-<i class="fa-solid fa-music"></i> {" "}
+<i className="fa-solid fa-music"></i> {" "}
 Media Player
 </Link>
 

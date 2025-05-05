@@ -15,7 +15,7 @@ const Allvideos = () => {
               <div className="d-flex justify-content-between align-items-center ">
                 <h4>title</h4>
                 <button className="btn">
-                  <i class="fa-solid fa-trash text-danger fw-bolder fs-5"></i>
+                  <i className="fa-solid fa-trash text-danger fw-bolder fs-5"></i>
                 </button>
               </div>
             </Card.Body>
