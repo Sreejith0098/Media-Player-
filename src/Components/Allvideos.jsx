@@ -1,27 +1,38 @@
-import React from "react";
-import { Card } from "react-bootstrap";
-import img2 from "../assets/history.jpeg";
-
+import React, { useState } from "react";
+import VideoCard from "./VideoCard";
+import { Col, Row } from "react-bootstrap";
+import { getvideoApi } from "../services/allApi";
+import { useEffect } from "react";
 
 const Allvideos = () => {
+  const[videosData,setVideosData]=useState([])
+  useEffect(()=>{
+    getvideos()
+  },[])
+  const getvideos = async()=>{
+    let result = await getvideoApi()
+    if(result.status>=200 && result.status<=300){
+    setVideosData(result.data)
+    }else{
+      alert("Error fetching video data")
+    }
+    console.log(result)
+  }
   return (
     <>
       <h1>All videos</h1>
-      <div className="row">
-        <div className="col-lg-4">
-          <Card style={{ width: "18rem" }}>
-            <Card.Img variant="top" src={img2} />
-            <Card.Body>
-              <div className="d-flex justify-content-between align-items-center ">
-                <h4>title</h4>
-                <button className="btn">
-                  <i className="fa-solid fa-trash text-danger fw-bolder fs-5"></i>
-                </button>
-              </div>
-            </Card.Body>
-          </Card>
-        </div>
-      </div>
+ 
+  <Row>
+    {
+      videosData?.map((eachVideos)=>(
+        <Col className="m-3" lg={4} md={6} sm={12} >
+        <VideoCard videos = {eachVideos} />
+        </Col>
+      ))
+    }
+   
+  </Row>
+      
     </>
   );
 };

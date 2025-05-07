@@ -8,32 +8,47 @@ import { uploadVideoAPI } from "../services/allApi";
 
 const Add = () => {
   const [show, setShow] = useState(false);
+  const [invalidYoutubeLink, setInvalidYoutubeLink] = useState(false);
   const [videoDetails, setVideoDetails] = useState({
     caption: "",
     imageUrl: "",
     youtubeLink: "",
   });
- 
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const  addDetails = async() => {
-    console.log(videoDetails);
-    let result = await uploadVideoAPI(videoDetails)
-    console.log(result)
-    if(result.status>=200 && result.status<=300){
-      alert("successfully Added your video")
-      handleClose()
+  const addDetails = async () => {
+    if (
+      videoDetails.caption &&
+      videoDetails.imageUrl &&
+      videoDetails.youtubeLink
+    ) {
+      let result = await uploadVideoAPI(videoDetails);
+      console.log(result);
+      if (result.status >= 200 && result.status <= 300) {
+        alert("successfully Added your video");
+        handleClose();
+      }else{
+        alert("Something went wrong please contact admin")
+      }
+    } else {
+      alert("Please fill the form");
     }
   };
 
   const convertedToId = (videoUrl) => {
-    console.log(videoUrl.slice(17, 28));
-    let videoId = videoUrl.slice(17, 28);
-  ;
-  setVideoDetails({
-    ...videoDetails,
-    youtubeLink: `https://www.youtube.com/embed/${videoId}`,
-  });}
+    if (videoUrl.includes(".be/")) {
+      console.log(videoUrl.slice(17, 28));
+      let videoId = videoUrl.slice(17, 28);
+      setVideoDetails({
+        ...videoDetails,
+        youtubeLink: `https://www.youtube.com/embed/${videoId}`,
+      });
+    } else {
+      setInvalidYoutubeLink(true);
+      console.error("invalid Youtube Link");
+    }
+  };
   return (
     <>
       <div className=" d-flex align-items-center">
@@ -88,13 +103,24 @@ const Add = () => {
                 placeholder="Video caption"
               />
             </FloatingLabel>
+            {invalidYoutubeLink ? (
+              <span className="text-danger fw-bolder">
+                Invalid Youtube Link
+              </span>
+            ) : (
+              ""
+            )}
           </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button onClick={addDetails} variant="primary">
+          <Button
+            disabled={invalidYoutubeLink}
+            onClick={addDetails}
+            variant="primary"
+          >
             Add
           </Button>
         </Modal.Footer>

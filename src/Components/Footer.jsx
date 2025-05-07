@@ -14,7 +14,7 @@ const Footer = () => {
             {" "}
             <i className="fa-solid fa-music"></i> Media Player
           </h4>
-          <p  >
+          <p>
             Designed and build with all the love in the world by the Luminar
             team with the help of our contributors.
           </p>

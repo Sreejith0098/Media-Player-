@@ -5,3 +5,6 @@ import CommonApi from "./CommonApi";
 export const uploadVideoAPI=async(videoData)=>{
    return await CommonApi('post','/allVideos',videoData)
 }
+export const getvideoApi =async()=>{
+   return await CommonApi('get','/allVideos',"")
+}
