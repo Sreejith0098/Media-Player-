@@ -8,3 +8,6 @@ export const uploadVideoAPI=async(videoData)=>{
 export const getvideoApi =async()=>{
    return await CommonApi('get','/allVideos',"")
 }
+export const addHistory = async(historyData)=>{
+   return await CommonApi('post','/allHistory',historyData)
+}

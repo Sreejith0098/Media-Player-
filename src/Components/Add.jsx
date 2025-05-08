@@ -6,7 +6,7 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { uploadVideoAPI } from "../services/allApi";
 
-const Add = () => {
+const Add = ({setVideoResponse}) => {
   const [show, setShow] = useState(false);
   const [invalidYoutubeLink, setInvalidYoutubeLink] = useState(false);
   const [videoDetails, setVideoDetails] = useState({
@@ -27,6 +27,7 @@ const Add = () => {
       console.log(result);
       if (result.status >= 200 && result.status <= 300) {
         alert("successfully Added your video");
+        setVideoResponse(result)
         handleClose();
       }else{
         alert("Something went wrong please contact admin")
