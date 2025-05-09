@@ -3,31 +3,32 @@ import { Card } from "react-bootstrap";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { addHistory } from "../services/allApi";
+import { addHistory, deleteVideosApi } from "../services/allApi";
 
-
-const VideoCard = ({ videos }) => {
+const VideoCard = ({ videos, setDeleteVideoResponse }) => {
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
-  const handleShow = async() => {
-    
-    const currentDate =new Date();
+  const handleShow = async () => {
+    const currentDate = new Date();
     const caption = videos.caption;
     const link = videos.youtubeLink;
     const reqObj = {
-        currentDate,
-        caption,
-        link,
+      currentDate,
+      caption,
+      link,
     };
     let result = await addHistory(reqObj);
-    console.log(result)
-    
-    
-    
-    
-    setShow(true)};
+    console.log(result);
+
+    setShow(true);
+  };
   console.log(videos);
+
+  const deleteVideos = async (id) => {
+    let result = await deleteVideosApi(id);
+    console.log(result);
+    setDeleteVideoResponse(result)
+  };
   return (
     <>
       <Card className="m-3" style={{ width: "18rem", height: "20rem" }}>
@@ -35,7 +36,7 @@ const VideoCard = ({ videos }) => {
         <Card.Body>
           <div className="d-flex justify-content-between align-items-center ">
             <h4>{videos?.caption}</h4>
-            <button className="btn">
+            <button onClick={() => deleteVideos(videos?.id)} className="btn">
               <i className="fa-solid fa-trash text-danger fw-bolder fs-5"></i>
             </button>
           </div>
