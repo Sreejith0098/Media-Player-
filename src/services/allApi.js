@@ -23,3 +23,9 @@ export const deleteVideosApi =async(id)=>{
 export const addCategory = async (category)=>{
   return await CommonApi ('post','/allCategories',category)
 }
+export const getCategoryApi = async ()=>{
+   return await CommonApi('get' ,'/allCategories',"")
+}
+export const getSingleVideo =async(id)=>{
+   return await CommonApi('get',`/allVideos/${id}`,"")
+}

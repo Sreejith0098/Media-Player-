@@ -29,9 +29,14 @@ const VideoCard = ({ videos, setDeleteVideoResponse }) => {
     console.log(result);
     setDeleteVideoResponse(result)
   };
+  const videoDrag= (e,id)=>{
+    console.log(e)
+    console.log(id)
+    e.dataTransfer.setData('videoId',id)
+  }
   return (
     <>
-      <Card className="m-3" style={{ width: "18rem", height: "20rem" }}>
+      <Card draggable="true" onDragStart={(e)=>videoDrag(e,videos?.id)} className="m-3" style={{ width: "18rem", height: "20rem" }}>
         <Card.Img onClick={handleShow} variant="top" src={videos?.imageUrl} />
         <Card.Body>
           <div className="d-flex justify-content-between align-items-center ">
