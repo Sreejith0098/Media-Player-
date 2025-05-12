@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { addHistory, deleteVideosApi } from "../services/allApi";
 
-const VideoCard = ({ videos, setDeleteVideoResponse }) => {
+const VideoCard = ({ videos, setDeleteVideoResponse,insideAllCategory }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = async () => {
@@ -36,14 +36,19 @@ const VideoCard = ({ videos, setDeleteVideoResponse }) => {
   }
   return (
     <>
-      <Card draggable="true" onDragStart={(e)=>videoDrag(e,videos?.id)} className="m-3" style={{ width: "18rem", height: "20rem" }}>
+      <Card draggable="true" onDragStart={(e)=>videoDrag(e,videos?.id)} className="m-3" style={{ width: "12rem", height: "15rem" }}>
         <Card.Img onClick={handleShow} variant="top" src={videos?.imageUrl} />
         <Card.Body>
           <div className="d-flex justify-content-between align-items-center ">
             <h4>{videos?.caption}</h4>
-            <button onClick={() => deleteVideos(videos?.id)} className="btn">
-              <i className="fa-solid fa-trash text-danger fw-bolder fs-5"></i>
-            </button>
+            {
+             insideAllCategory?<span></span>:
+             <button onClick={() => deleteVideos(videos?.id)} className="btn">
+             <i className="fa-solid fa-trash text-danger fw-bolder fs-2"></i>
+           </button>
+              }
+            
+           
           </div>
         </Card.Body>
       </Card>

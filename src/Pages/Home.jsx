@@ -6,6 +6,7 @@ import Allcategories from '../Components/Allcategories'
 
 const Home = () => {
   const[addVideoResponse,setVideoResponse] = useState([])
+  const[deleteVideoResponse,setDeleteVideoResponse] =useState([])
   return (
     <div>
       <div className="container my-3 d-flex justify-content-between">
@@ -14,10 +15,10 @@ const Home = () => {
       </div>
       <div className="container-fluid row">
         <div className="col-6">
-          <Allvideos addVideoResponse={addVideoResponse} />
+          <Allvideos addVideoResponse={addVideoResponse} deleteVideoResponse={deleteVideoResponse} />
         </div>
         <div className="col-6">
-          <Allcategories />
+        <Allcategories deleteVideoResponse={deleteVideoResponse} />
         </div>
       </div>
     </div>

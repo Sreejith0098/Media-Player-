@@ -3,13 +3,18 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+
 import {
   addCategory,
   getCategoryApi,
   getSingleVideo,
+  updateCategory,
+  deleteVideosApi,
+  deleteCategory,
 } from "../services/allApi";
+import VideoCard from "./VideoCard";
 
-const Allcategories = () => {
+const Allcategories = ({ setDeleteVideoResponse }) => {
   const [categoryName, setCategoryName] = useState("");
   const [show, setShow] = useState(false);
   const [categoryData, setCategoryData] = useState("");
@@ -24,6 +29,8 @@ const Allcategories = () => {
       videos: [],
     };
     let result = await addCategory(reqObj);
+    handleClose()
+    await getAllcategory()
     console.log(result);
   };
   const getAllcategory = async () => {
@@ -38,10 +45,19 @@ const Allcategories = () => {
     let vidId = e.dataTransfer.getData("videoId");
     let result = await getSingleVideo(vidId);
     eachCategory.videos.push(result.data);
-    console.log(eachCategory);
+    let updateResult = await updateCategory(eachCategory.id, eachCategory);
+    if (updateResult.status == 200) {
+      let deleteResult = await deleteVideosApi(vidId);
+      setDeleteVideoResponse(deleteResult);
+    }
+    console.log(updateResult);
   };
   const onDragging = (e) => {
     e.preventDefault();
+  };
+  const onDeleteClick = async (id) => {
+    await deleteCategory(id);
+    await getAllcategory()
   };
   return (
     <>
@@ -56,19 +72,29 @@ const Allcategories = () => {
       </div>
       {categoryData?.length > 0 ? (
         <div className="container-fluid mt-3">
-          {categoryData?.map((eachCategory,index) => (
+          {categoryData?.map((eachCategory, index) => (
             <div
-            key={index}
+              key={index}
               droppable="true"
               onDragOver={(e) => onDragging(e)}
-              onDrop={(e) => onvideoDrop(e,eachCategory)}
+              onDrop={(e) => onvideoDrop(e, eachCategory)}
               className="border rounded p-3"
             >
               <div className="d-flex justify-content-between">
                 <h3>{eachCategory.categoryName}</h3>
-                <button className="btn">
+                <button
+                  onClick={() => onDeleteClick(eachCategory.id)}
+                  className="btn"
+                >
                   <i className="fa-solid fa-trash"></i>
                 </button>
+              </div>
+              <div className="row me-2">
+                {eachCategory?.videos?.map((eachVideos) => (
+                  <div className="col-4 mt-2 ">
+                    <VideoCard videos={eachVideos} insideAllCategory={true} />
+                  </div>
+                ))}
               </div>
             </div>
           ))}

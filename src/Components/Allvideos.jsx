@@ -4,12 +4,12 @@ import { Col, Row } from "react-bootstrap";
 import { getvideoApi } from "../services/allApi";
 import { useEffect } from "react";
 
-const Allvideos = ({ addVideoResponse }) => {
+const Allvideos = ({ addVideoResponse,deleteVideoResponse }) => {
   const [videosData, setVideosData] = useState([]);
-  const [deleteVideoResponse, setDeleteVideoResponse] = useState([]);
+  const [deleteVideoResp, setDeleteVideoResp] = useState([]);
   useEffect(() => {
     getvideos();
-  }, [addVideoResponse, deleteVideoResponse]);
+  }, [addVideoResponse, deleteVideoResp,deleteVideoResponse]);
   const getvideos = async () => {
     let result = await getvideoApi();
     if (result.status >= 200 && result.status <= 300) {
@@ -29,7 +29,7 @@ const Allvideos = ({ addVideoResponse }) => {
           <Col key={index} className="m-3" lg={4} md={6} sm={12}>
             <VideoCard
               videos={eachVideos}
-              setDeleteVideoResponse={setDeleteVideoResponse}
+              setDeleteVideoResp={setDeleteVideoResp}
             />
           </Col>
         ))}
