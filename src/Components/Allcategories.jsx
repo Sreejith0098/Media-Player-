@@ -29,8 +29,8 @@ const Allcategories = ({ setDeleteVideoResponse }) => {
       videos: [],
     };
     let result = await addCategory(reqObj);
-    handleClose()
-    await getAllcategory()
+    handleClose();
+    await getAllcategory();
     console.log(result);
   };
   const getAllcategory = async () => {
@@ -45,7 +45,11 @@ const Allcategories = ({ setDeleteVideoResponse }) => {
     let vidId = e.dataTransfer.getData("videoId");
     let result = await getSingleVideo(vidId);
     eachCategory.videos.push(result.data);
-    let updateResult = await updateCategory(eachCategory.id, eachCategory);
+    let updateResult = await updateCategory(
+      eachCategory.id,
+      eachCategory,
+      eachVideos
+    );
     if (updateResult.status == 200) {
       let deleteResult = await deleteVideosApi(vidId);
       setDeleteVideoResponse(deleteResult);
@@ -57,7 +61,27 @@ const Allcategories = ({ setDeleteVideoResponse }) => {
   };
   const onDeleteClick = async (id) => {
     await deleteCategory(id);
-    await getAllcategory()
+    await getAllcategory();
+  };
+
+  const onvideoDrag = async (e, category, video) => {
+    //  console.log(e);
+    //  console.log(category);
+    //  console.log(video);
+    let stringData = JSON.stringify(video);
+    console.log(stringData);
+    e.dataTransfer.setData("videoFromCat", stringData);
+
+  let newVideosArray =category.videos.filter((item)=>item.id!=video.id)
+  let id = category.id
+  let categoryName = category.categoryName
+  let reqObj = {
+    id,categoryName,videos:newVideosArray
+  }
+  let result = await updateCategory(id,reqObj)
+  await getAllcategory()
+  console.log(newVideosArray);
+  
   };
   return (
     <>
@@ -91,7 +115,13 @@ const Allcategories = ({ setDeleteVideoResponse }) => {
               </div>
               <div className="row me-2">
                 {eachCategory?.videos?.map((eachVideos) => (
-                  <div className="col-4 mt-2 ">
+                  <div
+                    draggable="true"
+                    onDragStart={(e) =>
+                      onvideoDrag(e, eachCategory, eachVideos)
+                    }
+                    className=" col-4 mt-2 "
+                  >
                     <VideoCard videos={eachVideos} insideAllCategory={true} />
                   </div>
                 ))}
