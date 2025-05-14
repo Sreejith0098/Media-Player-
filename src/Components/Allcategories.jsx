@@ -48,7 +48,7 @@ const Allcategories = ({ setDeleteVideoResponse }) => {
     let updateResult = await updateCategory(
       eachCategory.id,
       eachCategory,
-      eachVideos
+     
     );
     if (updateResult.status == 200) {
       let deleteResult = await deleteVideosApi(vidId);
@@ -80,7 +80,10 @@ const Allcategories = ({ setDeleteVideoResponse }) => {
   }
   let result = await updateCategory(id,reqObj)
   await getAllcategory()
+  console.log(result);
+  
   console.log(newVideosArray);
+  
   
   };
   return (

@@ -17,7 +17,6 @@ const History = () => {
             console.log(id);
           let result =  await deleteHistoryApi(id);
           console.log(result);
-          getHistoryData()
     }
   
   return (
