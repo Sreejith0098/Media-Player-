@@ -44,7 +44,7 @@ const VideoCard = ({ videos, setDeleteVideoResponse,insideAllCategory }) => {
             {
              insideAllCategory?<span></span>:
              <button onClick={() => deleteVideos(videos?.id)} className="btn">
-             <i className="fa-solid fa-trash text-danger fw-bolder fs-2"></i>
+             <i style={{color:'black'}} className="fa-solid fa-trash text-danger fw-bolder fs-2"></i>
            </button>
               }
             
