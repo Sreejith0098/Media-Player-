@@ -36,8 +36,8 @@ const VideoCard = ({ videos, setDeleteVideoResponse,insideAllCategory }) => {
   }
   return (
     <>
-      <Card draggable="true" onDragStart={(e)=>videoDrag(e,videos?.id)} className="m-3" style={{ width: "12rem", height: "15rem" }}>
-        <Card.Img onClick={handleShow} variant="top" src={videos?.imageUrl} />
+      <Card draggable="true" onDragStart={(e)=>videoDrag(e,videos?.id)} className="m-3 "  style={{ width: "12rem", height: "15rem" }}>
+        <Card.Img style={{height:'150px'}} className="img-fluid" onClick={handleShow} variant="top" src={videos?.imageUrl} />
         <Card.Body>
           <div className="d-flex justify-content-between align-items-center ">
             <h4>{videos?.caption}</h4>
